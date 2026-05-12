@@ -1,9 +1,11 @@
-import { Button } from './components/ui/button';
+import InputField from './components/custom/InputField';
+import TodoDisplay from './components/custom/TodoDisplay';
 
 const App = () => {
   return (
-    <div className="">
-      <Button className="rounded-sm">Click Me</Button>
+    <div className="sm:w-[40vw] h-screen mx-auto p-10">
+      <InputField />
+      <TodoDisplay />
     </div>
   );
 };
