@@ -1,10 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-interface Todo {
-  id: string;
-  title: string;
-  completed: boolean;
-}
+import type { Todo } from '@/interface';
 
 const todoSlice = createSlice({
   name: 'todo',
@@ -24,11 +19,19 @@ const todoSlice = createSlice({
       state.todos[index] = { ...state.todos[index], ...action.payload };
     },
 
-    deleteTodo: () => {},
+    deleteTodo: (state, action: { payload: string }) => {
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+    },
 
-    completeTodo: () => {},
+    completeTodo: (state, action: { payload: string }) => {
+      const index = state.todos.findIndex((todo) => todo.id === action.payload);
+      const [compltedTodo] = state.todos.splice(index, 1); // 예시: [1,2,3,4,5].splice(2,1) -> [1,2,4,5]
+      compltedTodo.completed = true;
+      state.todos.push(compltedTodo);
+    },
   },
 });
 
-export const { addTodo, updateTodo } = todoSlice.actions;
+export const { addTodo, updateTodo, completeTodo, deleteTodo } =
+  todoSlice.actions;
 export default todoSlice.reducer;

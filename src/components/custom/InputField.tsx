@@ -3,6 +3,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import type { FormEvent } from 'react';
 import { addTodo } from '../../../redux/slices/todoSlice';
+import { toast } from 'sonner';
 
 const InputField = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,8 @@ const InputField = () => {
       e.currentTarget.reset();
       return;
     }
+
+    toast.error('Please enter a todo');
   };
   return (
     <form className="flex flex-1 gap-3 mt-32" onSubmit={addTodoData}>
